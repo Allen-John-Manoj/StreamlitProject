@@ -3,9 +3,3 @@ pandas
 numpy
 PyAudio
 SpeechRecognition
-pickle
-subprocess
-sounddevice
-librosa
-noisereduce
-scipy
