@@ -57,18 +57,20 @@ def continuous_matching():
         return
     
     while True:
-        audio_data = record_audio(duration=5)
+        audio_data = record_audio(duration=2)
         live_features = extract_features(audio_data)
         match = match_audio(live_features, saved_data)
         
-        if match is not None:
+        if match != 'noise':
             print(f"Match found: Roll Number {match}")
+            return match
         else:
             print("No match found.")
-        
-        if input("Press 'q' to quit or any other key to continue: ").lower() == 'q':
-            break
+            return None
+        #if input("Press 'q' to quit or any other key to continue: ").lower() == 'q':
+         #   break
 
 # Example usage
 if __name__ == "__main__":
-    continuous_matching()
+    while True:
+        continuous_matching()
