@@ -28,7 +28,9 @@ def main():
         
         # Mark attendance (simplified for demonstration)
         if st.button("Mark Attendance"):
-            st.success("Attendance marked successfully.")
+            result = subprocess.run(["python3", "attend_sys.py"], capture_output=True, text=True)
+            st.write(result.stdout)
+            st.success("Voice recognized and attendance marked.")
     
     elif choice == "Voice Recognition":
         st.subheader("Voice Recognition")
