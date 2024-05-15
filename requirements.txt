@@ -1,8 +1,8 @@
 streamlit
 pandas
 numpy
-pyaudio
-speechrecognition
+PyAudio
+SpeechRecognition
 pickle
 subprocess
 sounddevice
