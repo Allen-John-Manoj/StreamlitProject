@@ -50,11 +50,10 @@ def record_students(number_of_students):
         roll_no = input("Enter the student's roll number or type 'exit' to finish: ")
         if roll_no.lower() == 'exit':
             break
-        name = input("Enter name of ", roll_no)
-        audio_data = record_audio(duration=5)
+        audio_data = record_audio(duration=2)
         features = extract_features(audio_data)
-        save_data(roll_no, name, features)
-        print(f"Data saved for {roll_no}, {name}")
+        save_data(roll_no, features)
+        print(f"Data saved for {roll_no}")
 
 # Example usage
 if __name__ == "__main__":
