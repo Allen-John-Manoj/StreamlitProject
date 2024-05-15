@@ -1,5 +1,11 @@
 streamlit
 pandas
 numpy
-PyAudio
-SpeechRecognition
+pyaudio
+speechrecognition
+pickle
+subprocess
+sounddevice
+librosa
+noisereduce
+scipy
