@@ -1,35 +1,49 @@
 import streamlit as st
 import pandas as pd
 import pickle
+import subprocess
 
-# Assuming attend_sys has functions to load and save data, which it now needs to export
-import attend_sys
+# Load the data from data.pkl
+with open('data.pkl', 'rb') as file:
+    data = pickle.load(file)
 
-def load_data():
-    try:
-        with open('data.pkl', 'rb') as f:
-            data = pickle.load(f)
-    except FileNotFoundError:
-        st.error("Data file not found. Please ensure data exists before matching.")
-        return {}
-    return data
+# Convert the data into a DataFrame for easy display
+df = pd.DataFrame(data)
 
-def display_data(data):
-    if data:
-        df = pd.DataFrame(data).T  # Transpose to align with Streamlit's preferred DataFrame structure
-        st.dataframe(df)
-    else:
-        st.write("No data available.")
-
+# Define the main app
 def main():
-    st.title('Student Attendance System')
+    st.title("Automatic Attendance System")
+    
+    menu = ["Home", "Attendance System", "Voice Recognition", "Data Visualization"]
+    choice = st.sidebar.selectbox("Menu", menu)
+    
+    if choice == "Home":
+        st.subheader("Home")
+        st.write("Welcome to the Automatic Attendance System.")
+    
+    elif choice == "Attendance System":
+        st.subheader("Attendance System")
+        st.write("Displaying student details and marking attendance.")
+        st.dataframe(df)
+        
+        # Mark attendance (simplified for demonstration)
+        if st.button("Mark Attendance"):
+            st.success("Attendance marked successfully.")
+    
+    elif choice == "Voice Recognition":
+        st.subheader("Voice Recognition")
+        st.write("Record and recognize voice to mark attendance.")
+        
+        # Add a button to start the voice recognition process
+        if st.button("Start Voice Recognition"):
+            result = subprocess.run(["python3", "rec_audio.py"], capture_output=True, text=True)
+            st.write(result.stdout)
+            st.success("Voice recognized and attendance marked.")
+    
+    elif choice == "Data Visualization":
+        st.subheader("Data Visualization")
+        st.write("Displaying data from data.pkl.")
+        st.dataframe(df)
 
-    data = load_data()
-    display_data(data)
-
-    if st.button('Refresh Data'):
-        data = load_data()  # Reload data
-        display_data(data)
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
